@@ -1,0 +1,31 @@
+So I found expert mode easy after a while so I made a mod to make me rage quit. This mod works in normal mode and will stack with expert mode and any other similar mods. The effects are active when you have the mod enabled. With all that said, let's take a look at the actual changes.
+All enemies now have:
+
+1.5x Health
+1.5x Damage
+1.5x Defense
+1.5x Knockback Resistance
+1.5x Money Dropped
+Natural Regeneration (stronger regen in hardmode)
+Immunity to traps and lava
+
+All vanilla bosses get additional attacks/changes
+King Slime will shoot spikes
+Eye of Cthulhu will shoot tears
+Eater of Worlds head segments are double the size
+Brain of Cthulhu creepers are 50% larger
+Queen Bee will occasionally drop bee hives
+Skeletron throws bones at you with his hands
+Wall of Flesh alternates between shooting cursed flames and ichor from its mouth
+The Twins will heal when the other one dies
+The Destroyer and Probes are 250% bigger and the Destroyer's Head does 2x the damage
+Skeletron Prime shoots lasers
+Plantera's tentacles will block projectiles
+The Detached Golem head can fire cultist fireballs and the Golem has insane life regen
+Duke Fishron makes it rain deadly projectiles
+Lunatic Cultist spawns "Shadow Clones" that shoot his projectiles
+Moon Lord Core fires the same projectiles the Lunatic Cultist fires (shoots faster at half health)
+
+You have a chance to get the bleeding debuff when damaged.
+
+There are now poorly sprited biome cores which are accessories. They have a 1/500 chance to drop in their respective biome in hardmode. Each one increases a different stat and they can all be combined to create a powerful accessory.
