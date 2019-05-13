@@ -10,7 +10,7 @@ namespace GLHF
         {
             if (Main.rand.Next(3) == 0)
             {
-                player.AddBuff(BuffID.Bleeding, 150, false);
+                player.AddBuff(BuffID.Bleeding, 120, false);
             }
         }
     }

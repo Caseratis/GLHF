@@ -10,6 +10,10 @@ namespace GLHF
     public class GLHFGlobalNPC : GlobalNPC
     {
         int NPCLifeRegenTimer;
+        int spazTimer = 0;
+        int skeletronLaserTimer = 0;
+        int destroyerTimer = 0;
+        int mistTimer = 0;
 
         public override bool InstancePerEntity
         {
@@ -23,32 +27,32 @@ namespace GLHF
         {
             if (Config.ScaleHealth == true)
             {
-                npc.lifeMax += npc.lifeMax / 2;
+                npc.lifeMax += (int)(npc.lifeMax * .25);
             }
 
             if (Config.ScaleDefense == true)
             {
-                npc.defense += npc.defense / 2;
+                npc.defense += (int)(npc.defense *.25);
             }
 
             if (Config.ScaleDamage == true)
             {
-                npc.damage += npc.damage / 2;
+                npc.damage += (int)(npc.damage * .25);
             }
 
             if (Config.ScaleKnockback == true)
             {
-                npc.knockBackResist *= 1.5f;
+                npc.knockBackResist *= .75f;
 
             }
 
-            if (Config.TrapImmunity == true)
+            if (Config.TrapImmunity == true && !npc.townNPC)
             {
 
                 npc.trapImmune = true;
             }
 
-            if (Config.LavaImmunity == true)
+            if (Config.LavaImmunity == true && !npc.townNPC)
             {
                 npc.lavaImmune = true;
             }
@@ -94,7 +98,79 @@ namespace GLHF
 
         }
 
-        
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public override void AI(NPC npc)
+        {
+            if (npc.type == NPCID.Retinazer)
+            {
+                if (!NPC.AnyNPCs(NPCID.Spazmatism))
+                {
+                    npc.ai[0] = 3;
+                    if (npc.life <= npc.lifeMax * .5)
+                    {
+                        npc.localAI[1] += 5;
+                    }
+                }
+
+            }
+
+            if (npc.type == NPCID.Spazmatism)
+            {
+                
+                if (!NPC.AnyNPCs(NPCID.Retinazer))
+                {
+                    npc.ai[0] = 3;
+                    if (npc.life <= npc.lifeMax * .5)
+                    {
+                        if (npc.ai[1] == 0)
+                        {
+                            if (Collision.CanHit(npc.position, npc.width, npc.height, Main.player[npc.target].position, Main.player[npc.target].width, Main.player[npc.target].height))
+                            {
+                                spazTimer++;
+                                float Speed = 20;
+                                Player P = Main.player[npc.target];
+                                Vector2 vector8 = new Vector2(npc.position.X + (npc.width / 2), npc.position.Y + (npc.height / 2));
+                                float rotation = (float)Math.Atan2(vector8.Y - (P.position.Y + (P.height * 0.5f)), vector8.X - (P.position.X + (P.width * 0.5f)));
+                                if (spazTimer >= 30)
+                                {
+                                    spazTimer = 0;
+                                    Projectile.NewProjectile(vector8.X, vector8.Y, (float)((Math.Cos(rotation) * Speed) * -1), (float)((Math.Sin(rotation) * Speed) * -1), ProjectileID.CursedFlameHostile, 27, 0f, 0);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (npc.type == NPCID.SkeletronPrime)
+            {
+
+                if (!NPC.AnyNPCs(NPCID.PrimeCannon) && !NPC.AnyNPCs(NPCID.PrimeLaser) && !NPC.AnyNPCs(NPCID.PrimeVice) && !NPC.AnyNPCs(NPCID.PrimeSaw))
+                {
+                    if (npc.ai[1] == 1)
+                    {
+                        skeletronLaserTimer++;
+                        if (skeletronLaserTimer >= 10)
+                        {
+                            skeletronLaserTimer = 0;
+                            Projectile.NewProjectile(npc.Center, new Vector2(5, 5).RotatedByRandom(MathHelper.ToRadians(360)), ProjectileID.DeathLaser, 25, 0); //Spawning a projectile
+                        }
+                    }
+                }
+            }
+
+            if (npc.type == NPCID.TheDestroyer)
+            {
+                destroyerTimer++;
+                if (destroyerTimer >= 900)
+                {
+                    destroyerTimer = 0;
+                    Player P = Main.player[npc.target];
+                    Projectile.NewProjectile(P.Center, new Vector2(0, 0), mod.ProjectileType("LaserStrike"), 0, 0, 0);
+                }
+            }
+        }
 
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

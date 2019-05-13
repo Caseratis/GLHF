@@ -33,22 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AI\BrainOfCthulhuAI.cs" />
-    <Compile Include="AI\CultistAI.cs" />
-    <Compile Include="AI\DestroyerAI.cs" />
-    <Compile Include="AI\EaterOfWorldsAI.cs" />
-    <Compile Include="AI\EyeOfCthulhuAI.cs" />
-    <Compile Include="AI\FishronAI.cs" />
-    <Compile Include="AI\GolemAI.cs" />
-    <Compile Include="AI\KingSlimeAI.cs" />
-    <Compile Include="AI\MoonlordAI.cs" />
-    <Compile Include="AI\PlanteraAI.cs" />
-    <Compile Include="AI\QueenBeeAI.cs" />
-    <Compile Include="AI\ShadowCultist.cs" />
-    <Compile Include="AI\SkeletronAI.cs" />
-    <Compile Include="AI\SkeletronPrimeAI.cs" />
-    <Compile Include="AI\TwinsAI.cs" />
-    <Compile Include="AI\WallOfFleshAI.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Dusts\TearDust.cs" />
     <Compile Include="GLHF.cs" />
@@ -68,9 +52,7 @@
     <Compile Include="Items\UndergroundCore.cs" />
     <Compile Include="MyPlayer.cs" />
     <Compile Include="MyWorld.cs" />
-    <Compile Include="NPCs\RepairDroneSaw.cs" />
-    <Compile Include="Projectiles\Rain.cs" />
-    <Compile Include="Projectiles\Tears.cs" />
+    <Compile Include="Projectiles\LaserStrike.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
@@ -93,6 +75,10 @@
     <Reference Include="Terraria">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\terraria\Terraria.exe</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AI\" />
+    <Folder Include="NPCs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
