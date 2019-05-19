@@ -53,6 +53,8 @@
     <Compile Include="MyPlayer.cs" />
     <Compile Include="MyWorld.cs" />
     <Compile Include="Projectiles\LaserStrike.cs" />
+    <Compile Include="NPCs\MiniRet.cs" />
+    <Compile Include="NPCs\MiniSpaz.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
@@ -78,7 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AI\" />
-    <Folder Include="NPCs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -104,73 +104,71 @@ namespace GLHF
         {
             if (npc.type == NPCID.Retinazer)
             {
+                int latestNPC = npc.whoAmI;
                 if (!NPC.AnyNPCs(NPCID.Spazmatism))
                 {
-                    npc.ai[0] = 3;
-                    if (npc.life <= npc.lifeMax * .5)
+
+                    if (!NPC.AnyNPCs(mod.NPCType("MiniSpaz")))
                     {
-                        npc.localAI[1] += 5;
+                        Main.PlaySound(SoundID.Roar, (int)npc.position.X, (int)npc.position.Y, 0);
+                        latestNPC = NPC.NewNPC((int)npc.Center.X / 2, (int)npc.Center.Y / 2, mod.NPCType("MiniSpaz"), npc.whoAmI, 0, latestNPC);
+                        Main.npc[(int)latestNPC].ai[3] = npc.whoAmI;
+
+
+
                     }
                 }
 
             }
 
-            if (npc.type == NPCID.Spazmatism)
-            {
-                
-                if (!NPC.AnyNPCs(NPCID.Retinazer))
+                if (npc.type == NPCID.Spazmatism)
                 {
-                    npc.ai[0] = 3;
-                    if (npc.life <= npc.lifeMax * .5)
+                    int latestNPC = npc.whoAmI;
+                    if (!NPC.AnyNPCs(NPCID.Retinazer))
                     {
-                        if (npc.ai[1] == 0)
+
+                        if (!NPC.AnyNPCs(mod.NPCType("MiniRet")))
                         {
-                            if (Collision.CanHit(npc.position, npc.width, npc.height, Main.player[npc.target].position, Main.player[npc.target].width, Main.player[npc.target].height))
+                        Main.PlaySound(SoundID.Roar, (int)npc.position.X, (int)npc.position.Y, 0);
+                        latestNPC = NPC.NewNPC((int)npc.Center.X / 2, (int)npc.Center.Y / 2, mod.NPCType("MiniRet"), npc.whoAmI, 0, latestNPC);
+                            Main.npc[(int)latestNPC].ai[3] = npc.whoAmI;
+
+
+
+                        }
+                    }
+                }
+
+                if (npc.type == NPCID.SkeletronPrime)
+                {
+
+                    if (!NPC.AnyNPCs(NPCID.PrimeCannon) && !NPC.AnyNPCs(NPCID.PrimeLaser) && !NPC.AnyNPCs(NPCID.PrimeVice) && !NPC.AnyNPCs(NPCID.PrimeSaw))
+                    {
+                        if (npc.ai[1] == 1)
+                        {
+                            skeletronLaserTimer++;
+                            if (skeletronLaserTimer >= 10)
                             {
-                                spazTimer++;
-                                float Speed = 20;
-                                Player P = Main.player[npc.target];
-                                Vector2 vector8 = new Vector2(npc.position.X + (npc.width / 2), npc.position.Y + (npc.height / 2));
-                                float rotation = (float)Math.Atan2(vector8.Y - (P.position.Y + (P.height * 0.5f)), vector8.X - (P.position.X + (P.width * 0.5f)));
-                                if (spazTimer >= 30)
-                                {
-                                    spazTimer = 0;
-                                    Projectile.NewProjectile(vector8.X, vector8.Y, (float)((Math.Cos(rotation) * Speed) * -1), (float)((Math.Sin(rotation) * Speed) * -1), ProjectileID.CursedFlameHostile, 27, 0f, 0);
-                                }
+                                skeletronLaserTimer = 0;
+                                Projectile.NewProjectile(npc.Center, new Vector2(5, 5).RotatedByRandom(MathHelper.ToRadians(360)), ProjectileID.DeathLaser, 25, 0); //Spawning a projectile
                             }
                         }
                     }
                 }
-            }
 
-            if (npc.type == NPCID.SkeletronPrime)
-            {
-
-                if (!NPC.AnyNPCs(NPCID.PrimeCannon) && !NPC.AnyNPCs(NPCID.PrimeLaser) && !NPC.AnyNPCs(NPCID.PrimeVice) && !NPC.AnyNPCs(NPCID.PrimeSaw))
+                if (npc.type == NPCID.TheDestroyer)
                 {
-                    if (npc.ai[1] == 1)
+                    destroyerTimer++;
+                    if (destroyerTimer >= 900)
                     {
-                        skeletronLaserTimer++;
-                        if (skeletronLaserTimer >= 10)
-                        {
-                            skeletronLaserTimer = 0;
-                            Projectile.NewProjectile(npc.Center, new Vector2(5, 5).RotatedByRandom(MathHelper.ToRadians(360)), ProjectileID.DeathLaser, 25, 0); //Spawning a projectile
-                        }
+                        destroyerTimer = 0;
+                        Player P = Main.player[npc.target];
+                        Projectile.NewProjectile(P.Center, new Vector2(0, 0), mod.ProjectileType("LaserStrike"), 0, 0, 0);
                     }
                 }
-            }
-
-            if (npc.type == NPCID.TheDestroyer)
-            {
-                destroyerTimer++;
-                if (destroyerTimer >= 900)
-                {
-                    destroyerTimer = 0;
-                    Player P = Main.player[npc.target];
-                    Projectile.NewProjectile(P.Center, new Vector2(0, 0), mod.ProjectileType("LaserStrike"), 0, 0, 0);
-                }
-            }
+            
         }
+        
 
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
